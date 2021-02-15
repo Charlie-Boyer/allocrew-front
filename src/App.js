@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { token } from './utils/token';
-import bg from './images/banniere.png';
 
 // import Components
 import Login from './components/login';
@@ -57,7 +56,7 @@ const App = () => {
           'https://allocrew.herokuapp.com/api/token_check', {
           method: 'POST',
           headers: {
-            Authorization: `bearer ${token}`,
+            Authorization: `bearer ${token()}`,
           },
         }
         )

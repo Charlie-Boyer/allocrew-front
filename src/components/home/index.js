@@ -19,7 +19,7 @@ const Home = () => {
           'https://allocrew.herokuapp.com/api/announcements', {
           method: 'GET',
           headers: {
-            Authorization: `bearer ${token}`,
+            Authorization: `bearer ${token()}`,
           },
         }
         )
@@ -34,6 +34,7 @@ const Home = () => {
 
   return (
     <div className="home__container">
+      {console.log(userToken())}
       <div className="home__left">
         <div className="home__profile">
           <Profile/>
@@ -85,7 +86,7 @@ const Home = () => {
         {filter === 'voluntary' && <AnnouncementList list={list.filter((one) => one.voluntary === true)} />}
         {filter === 'paid' && <AnnouncementList list={list.filter((one) => one.voluntary === false)} />}
         {filter === 'all' && <AnnouncementList list={list.map((one) => one)} />}
-        {filter === 'my' && <AnnouncementList list={list.filter((one) => one.user.id === userToken.id )} />}
+        {filter === 'my' && <AnnouncementList list={list.filter((one) => one.user.id === userToken().id )} />}
       </div>
     </div>
   );

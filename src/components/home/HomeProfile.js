@@ -20,10 +20,10 @@ const HomeProfile = () => {
     async function data() {
       try {
         const res = await fetch(
-          `https://allocrew.herokuapp.com/api/users/${userToken.id}`, {
+          `https://allocrew.herokuapp.com/api/users/${userToken().id}`, {
           method: 'GET',
           headers: {
-            Authorization: `bearer ${token}`,
+            Authorization: `bearer ${token()}`,
           },
         }
         )
@@ -34,8 +34,6 @@ const HomeProfile = () => {
     }
     data()
   }, []);
-
-  const token = localStorage.getItem('token')
 
   return (
     <>
