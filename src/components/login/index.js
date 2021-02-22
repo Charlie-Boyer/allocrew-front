@@ -1,21 +1,46 @@
-import React from 'react';
-import './style.scss';
-import { Formik, Field, Form } from 'formik';
+import React from 'react'
+import { useHistory } from 'react-router-dom'
+import './style.scss'
+import { Formik, Field, Form } from 'formik'
+import { useAuth } from '../../api/authContext'
 
 
-const Login = ({connect, flash}) => {
+const Login = () => {
 
+  let history = useHistory()
+  let { storeUser } = useAuth()
+
+  async function onLoginSubmit(data) {
+    try {
+      const res = await fetch(
+        'https://allocrew.herokuapp.com/api/login_check', {
+        headers: { 'content-type': 'application/json' },
+        method: 'POST',
+        body: JSON.stringify({
+          username: data.username,
+          password: data.password
+        })
+      }
+      )
+      const content = await res.json()
+      console.log(content)
+      if (res.ok) {
+        localStorage.setItem('token', content.token)
+        storeUser()
+        return history.push('/auth')
+      }
+    } catch (error) {
+    }
+  }
   
   return (
     <div className="login__container">
       <Formik
         initialValues={{ username: "", password: "" }}
-        onSubmit={connect}
+        onSubmit={onLoginSubmit}
       >
-
         <Form className="login__form">
           <h1>Connexion</h1>
-          <p style={{ "color": "white" }}>{flash}</p>
           <Field
             name="username"
             className="login__input"
@@ -28,7 +53,6 @@ const Login = ({connect, flash}) => {
             placeholder="Mot de passe" />
           <button className="login__button" type="submit">Se connecter</button>
         </Form>
-
       </Formik>
     </div >
   )

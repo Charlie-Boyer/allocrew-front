@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.scss';
-import bg from '../../images/banniere.png';
+import bg from '../../img/banniere.png';
 import {
   Link,
 } from 'react-router-dom';

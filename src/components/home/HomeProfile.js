@@ -3,36 +3,15 @@ import { Link } from 'react-router-dom';
 
 // import local
 import './style.scss';
+import { getUser } from '../../api/userApi'
 import { token, userToken } from '../../utils/token';
 
 const HomeProfile = () => {
 
-  const [ userInfo, setUserInfo ] = useState({
-    id: '',
-    backgroundImage: '',
-    picture: '',
-    firstname: '',
-    lastname: '',
-    title: ''
-  })
+  const [ userInfo, setUserInfo ] = useState({})
 
   useEffect(() => {
-    async function data() {
-      try {
-        const res = await fetch(
-          `https://allocrew.herokuapp.com/api/users/${userToken().id}`, {
-          method: 'GET',
-          headers: {
-            Authorization: `bearer ${token()}`,
-          },
-        }
-        )
-        const content = await res.json();
-        if (res.status === 200){ setUserInfo(content[0]) }
-      } catch (error) {
-      }
-    }
-    data()
+    getUser(token, userToken, setUserInfo)
   }, []);
 
   return (

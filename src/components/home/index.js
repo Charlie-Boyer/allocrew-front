@@ -6,6 +6,7 @@ import { token, userToken } from '../../utils/token';
 import './style.scss';
 import Profile from './HomeProfile';
 import AnnouncementList from '../announcement-list';
+import { getAnnouncements } from '../../api/announcementsAPI'
 
 const Home = () => {
 
@@ -13,28 +14,12 @@ const Home = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    async function data() {
-      try {
-        const res = await fetch(
-          'https://allocrew.herokuapp.com/api/announcements', {
-          method: 'GET',
-          headers: {
-            Authorization: `bearer ${token()}`,
-          },
-        }
-        )
-        const content = await res.json();
-        if (res.status === 200){ setList(content) }
-      } catch (error) {
-      }
-    }
-    data()
+    getAnnouncements(token, setList)
   }, []);
 
 
   return (
     <div className="home__container">
-      {console.log(userToken())}
       <div className="home__left">
         <div className="home__profile">
           <Profile/>
