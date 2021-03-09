@@ -29,7 +29,7 @@ export async function postCreateAnnouncement(data, user) {
     voluntary: data.salary ? true : false,
     date_start: '2020-10-10T00:00:00+00:00',
     date_end: '2020-10-10T00:00:00+00:00',
-    picture: 'https://picsum.photos/200',
+    picture: data.picture,
     user: user.userId
   }
 
