@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './style.scss';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../api/authContext'
+import { useAuth } from '../../contexts/authContext'
 
 const Header = () => {
 
@@ -31,7 +31,7 @@ const Header = () => {
     <div className="app__header">
       <nav className="header__nav">
         <div className="transparent" />
-        <Link to="/home">
+        <Link to="/auth">
           <div className="header__logo__container">
             <div className="header__logo ">AlloCrew</div>
           </div>
@@ -39,7 +39,7 @@ const Header = () => {
         <>
           <div className="header__links-desktop">
             <ul className="">
-              <Link to="/home"><li>Accueil</li></Link>
+              <Link to="/auth"><li>Accueil</li></Link>
               <Link to="/search"><li>Rechercher</li></Link>
               <Link to="/tchat-room"><li>Messagerie</li></Link>
             </ul>
@@ -50,7 +50,7 @@ const Header = () => {
         {menuState && (
           <div className="header__menu">
             <ul className="header__links-mobile">
-              <Link to="/home"><li>Accueil</li></Link>
+              <Link to="/auth"><li>Accueil</li></Link>
               <Link to="/search"><li>Rechercher</li></Link>
               <Link to="/tchat-room"><li>Messagerie</li></Link>
             </ul>

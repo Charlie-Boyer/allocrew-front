@@ -18,8 +18,28 @@ export async function registerUser(data) {
   }
 }
 
-
-
+export async function loginUser(data, history, storeUser) {
+  try {
+    const res = await fetch(
+      'https://allocrew.herokuapp.com/api/login_check', {
+      headers: { 'content-type': 'application/json' },
+      method: 'POST',
+      body: JSON.stringify({
+        username: data.username,
+        password: data.password
+      })
+    }
+    )
+    const content = await res.json()
+    console.log(content)
+    if (res.ok) {
+      localStorage.setItem('token', content.token)
+      storeUser()
+      return history.push('/auth')
+    }
+  } catch (error) {
+  }
+}
 
 export async function getUser(token, userToken, setUserInfo) {
   try {

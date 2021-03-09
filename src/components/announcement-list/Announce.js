@@ -28,7 +28,7 @@ const Announce = ({
       </div>
       <div className="announce__botright">
         <div className="announce__details">
-          <p>du {dateStart} au {dateEnd}</p>
+          {/* <p>du {dateStart} au {dateEnd}</p> */}
           <p>à {location}</p>
           <p> {voluntary ? 'Bénévole' : 'Rémunérée'}</p>
         </div>

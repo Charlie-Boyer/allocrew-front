@@ -17,7 +17,6 @@ $shadow: 2px 3px 3px 0 rgba(0,0,0, .2);
 }
 
 @mixin inputStyle {
-  margin: .5rem .7rem;
   border: none;
   border-bottom: 1px solid $blue;
   background-color: #444;

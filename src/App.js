@@ -10,7 +10,7 @@ import Home from './components/home'
 import LandPage from './components/land-page'
 import Register from './components/register'
 import CreateAnnouncement from './components/create-announcement'
-import { AuthProvider } from './api/authContext'
+import { AuthProvider } from './contexts/authContext'
 
 const App = () => {
 
@@ -23,7 +23,8 @@ const App = () => {
             <GuestRoute exact path="/" component={LandPage} />
             <GuestRoute path="/login" component={Login} />
             <GuestRoute path="/register" component={Register} />
-            <PrivateRoute path="/auth" component={Home} />
+            <PrivateRoute path="/auth/create" component={CreateAnnouncement} />
+            <PrivateRoute exact path="/auth" component={Home} />
             <Route path="*" render={() => <h2>404 not found</h2>} />
           </Switch>
         </ div>

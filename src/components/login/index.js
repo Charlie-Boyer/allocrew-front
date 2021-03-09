@@ -1,43 +1,24 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom'
-import './style.scss'
-import { Formik, Field, Form } from 'formik'
-import { useAuth } from '../../api/authContext'
+import React from 'react';
+import './style.scss';
+import { Formik, Field, Form } from 'formik';
+import { useAuth } from '../../contexts/authContext';
+import { useHistory } from 'react-router-dom';
+import { loginUser } from '../../api/userApi';
 
 
 const Login = () => {
 
+  // used for redirection in logiUser
   let history = useHistory()
+  // sets an userId prop in auth context
   let { storeUser } = useAuth()
 
-  async function onLoginSubmit(data) {
-    try {
-      const res = await fetch(
-        'https://allocrew.herokuapp.com/api/login_check', {
-        headers: { 'content-type': 'application/json' },
-        method: 'POST',
-        body: JSON.stringify({
-          username: data.username,
-          password: data.password
-        })
-      }
-      )
-      const content = await res.json()
-      console.log(content)
-      if (res.ok) {
-        localStorage.setItem('token', content.token)
-        storeUser()
-        return history.push('/auth')
-      }
-    } catch (error) {
-    }
-  }
-  
+
   return (
     <div className="login__container">
       <Formik
         initialValues={{ username: "", password: "" }}
-        onSubmit={onLoginSubmit}
+        onSubmit={(data) => loginUser(data, history, storeUser)}
       >
         <Form className="login__form">
           <h1>Connexion</h1>

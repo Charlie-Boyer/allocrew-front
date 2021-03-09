@@ -27,7 +27,7 @@ const HomeProfile = () => {
           <Link to="/tchat-room"><li className="home__liste">Messagerie</li></Link>
           <Link to="/"><li className="home__liste">Déconnexion</li></Link>
         </ul>
-        <Link to="/create-announcement"><input className="button" type="home__button button" value="Poster une annonce" readOnly /></Link>
+        <Link to="/auth/create"><input className="button" type="home__button button" value="Poster une annonce" readOnly /></Link>
       </div>
     </>
   );

@@ -4,16 +4,17 @@ import decode from "jwt-decode"
 
 const AuthContext = createContext()
 
+
+// Custom Hook 
 export function useAuth() {
   return useContext(AuthContext)
 }
 
+
+
 export function AuthProvider({ children }) {
-
   const history = useHistory()
-
   const [user, setUser] = useState({})
-  
   useEffect(storeUser, [])
 
 
@@ -44,12 +45,14 @@ export function AuthProvider({ children }) {
   }
 
 
+  //This object contains all the props I want to have access to via this context
   let value = {
     user,
     setUser,
     checkAuth,
     storeUser,
-    logout
+    logout,
+
   }
 
   return (

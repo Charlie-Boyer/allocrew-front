@@ -1,5 +1,5 @@
 import { Route, Redirect } from 'react-router-dom'
-import { useAuth } from '../api/authContext'
+import { useAuth } from '../contexts/authContext'
 
 export function PrivateRoute({ component: Component, ...rest }) {
 

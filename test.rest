@@ -1,0 +1,8 @@
+POST https://allocrew.herokuapp.com/api/login_check HTTP/1.1
+
+content-type: application/json
+
+{
+    "username": "charlie@allocrew.com",
+    "password": "allocrew"
+}

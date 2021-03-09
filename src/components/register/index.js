@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 import { Formik, Field, Form } from 'formik';
-import { registerUser} from '../../api/userApi';
+import { registerUser } from '../../api/userApi';
 
 
 const Register = () => {
@@ -13,7 +13,6 @@ const Register = () => {
         initialValues={{ firstname: "", lastname: "", email: "", password: "" }}
         onSubmit={(data) => registerUser(data)}
       >
-
         <Form className="login__form">
           <h1>Inscription</h1>
           <Field
@@ -38,7 +37,6 @@ const Register = () => {
             placeholder="Mot de passe" />
           <button className="login__button" type="submit">S'enregistrer</button>
         </Form>
-
       </Formik>
     </div >
   )
