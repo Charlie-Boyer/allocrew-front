@@ -1,27 +1,35 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
-import decode from "jwt-decode"
+import { createContext, useContext, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import decode from "jwt-decode";
 
-const AuthContext = createContext()
+const AuthContext = createContext();
+
 
 
 // Custom Hook 
+
 export function useAuth() {
-  return useContext(AuthContext)
-}
+  return useContext(AuthContext);
+};
+
 
 
 
 export function AuthProvider({ children }) {
+
+
   const history = useHistory()
   const [user, setUser] = useState({})
+  
   useEffect(storeUser, [])
 
 
   function token() {
     let encoded = localStorage.getItem('token')
     return encoded && decode(encoded)
-  }
+  };
+
+
 
   function checkAuth() {
     if (!token()) { return false }
@@ -33,16 +41,20 @@ export function AuthProvider({ children }) {
     } catch (error) {
       return false
     }
-  }
+  };
+
+
 
   function storeUser() {
-    setUser({ userId: token()?.id })
-  }
+    setUser({ userId: token()?.id });
+  };
+
+
 
   function logout() {
-    localStorage.removeItem('token')
-    history.push('/')
-  }
+    localStorage.removeItem('token');
+    history.push('/');
+  };
 
 
   //This object contains all the props I want to have access to via this context
@@ -53,11 +65,11 @@ export function AuthProvider({ children }) {
     storeUser,
     logout,
 
-  }
+  };
 
   return (
     <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   )
-}
+};

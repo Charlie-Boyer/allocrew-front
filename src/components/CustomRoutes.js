@@ -1,5 +1,5 @@
-import { Route, Redirect } from 'react-router-dom'
-import { useAuth } from '../contexts/authContext'
+import { Route, Redirect } from 'react-router-dom';
+import { useAuth } from '../contexts/authContext';
 
 export function PrivateRoute({ component: Component, ...rest }) {
 
@@ -8,7 +8,14 @@ export function PrivateRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={props => checkAuth() ? <Component {...props} /> : <Redirect to="/login" />      
+      render={props => {
+        if (checkAuth()) {
+          return <Component {...props} />
+        }
+        else {
+          return <Redirect to="/login" />
+        }
+      }
       }
     />
   )
@@ -21,7 +28,14 @@ export function GuestRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={props => checkAuth() ? <Redirect to="/auth" /> :<Component {...props} />      
+      render={props => {
+        if (checkAuth()) {
+          return <Redirect to="/auth" />
+        }
+        else {
+          return <Component {...props} />
+        }
+      }
       }
     />
   )

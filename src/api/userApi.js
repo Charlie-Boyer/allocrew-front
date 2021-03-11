@@ -56,3 +56,33 @@ export async function getUser(token, userToken, setUserInfo) {
   } catch (error) {
   }
 }
+
+export async function editUserInfo(data, id) {
+  try {
+    const res = await fetch(
+      `https://allocrew.herokuapp.com/api/users/${id}`, {
+      headers: { 
+        Authorization: `bearer ${localStorage.getItem('token')}`,
+        'content-type': 'application/json' 
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        firstname: data.firstname,
+        lastname: data.lastname,
+        age: 0,
+        location: data.location,
+        title: "",
+        description: data.description, 
+        experience: "", 
+        portfolio: "", 
+        picture: data.picture, 
+        bannerpicture: ""
+      })
+    }
+    )
+    console.log(res.status)
+    
+  } catch (error) {
+    console.log(error)
+  }
+}

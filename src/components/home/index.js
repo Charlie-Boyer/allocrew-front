@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-// import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import { token, userToken } from '../../utils/token';
 
 // import local
 import './style.scss';
 import Profile from './HomeProfile';
-import AnnouncementList from '../announcement-list';
+import List from '../posts/List';
 import { getAnnouncements } from '../../api/announcementsAPI'
 
 const Home = () => {
@@ -25,16 +24,6 @@ const Home = () => {
           <Profile/>
         </div>
         <div className="home__news">
-          {/* <TwitterTimelineEmbed
-            sourceType="profile"
-            screenName="crewallo"
-            theme="dark"
-            transparent
-            noScrollbar
-            placeholder="Loading Twitter"
-            noHeader
-            options={{ height: 350 }}
-          /> */}
         </div>
       </div>
       <div className="home__list">
@@ -68,10 +57,10 @@ const Home = () => {
           >Mes annonces
           </li>
         </ul>
-        {filter === 'voluntary' && <AnnouncementList list={list.filter((one) => one.voluntary === true)} />}
-        {filter === 'paid' && <AnnouncementList list={list.filter((one) => one.voluntary === false)} />}
-        {filter === 'all' && <AnnouncementList list={list.map((one) => one)} />}
-        {filter === 'my' && <AnnouncementList list={list.filter((one) => one.user.id === userToken().id )} />}
+        {filter === 'voluntary' && <List list={list.filter((one) => one.voluntary === true)} />}
+        {filter === 'paid' && <List list={list.filter((one) => one.voluntary === false)} />}
+        {filter === 'all' && <List list={list.map((one) => one)} />}
+        {filter === 'my' && <List list={list.filter((one) => one.user.id === userToken().id )} />}
       </div>
     </div>
   );

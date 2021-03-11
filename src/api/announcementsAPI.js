@@ -1,4 +1,7 @@
 
+
+
+
 export async function getAnnouncements(token, setList) {
   try {
     const res = await fetch(
@@ -15,8 +18,7 @@ export async function getAnnouncements(token, setList) {
   }
 }
 
-
-export async function postCreateAnnouncement(data, user) {
+export async function postCreateAnnouncement(data, user, history) {
 
   console.log(user.userId, data.title)
 
@@ -46,12 +48,67 @@ export async function postCreateAnnouncement(data, user) {
       })
     }
     )
-    const content = await res.json()
-    console.log(content)
-    if (res.ok) {
+    if (await res.ok) {
+      return true
       // todo
     }
   } catch (error) {
+  }
+};
+
+export async function patchEditAnnouncement(data, _, id) {
+
+  const myData = {
+    title: data.title,
+    location: data.location,
+    category: 'rerezrez',
+    description: data.description,
+    active: true,
+    voluntary: data.salary ? true : false,
+    date_start: '2020-10-10T00:00:00+00:00',
+    date_end: '2020-10-10T00:00:00+00:00',
+    picture: data.picture,
+
+  }
+
+  try {
+    const res = await fetch(
+      `https://allocrew.herokuapp.com/api/announcements/${id}`, {
+      headers: {
+        Authorization: `bearer ${localStorage.getItem('token')}`,
+        'content-type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        ...myData
+      })
+    }
+    )
+    if (await res.ok) {
+      return true;
+      // todo
+    }
+  } catch (error) {
+  }
+};
+
+export async function deleteAnnouncement(id, history) {
+  try {
+    const res = await fetch(
+      `https://allocrew.herokuapp.com/api/announcements/${id}`, {
+      headers: {
+        Authorization: `bearer ${localStorage.getItem('token')}`,
+        'content-type': 'application/json'
+      },
+      method: 'DELETE',
+      }
+    )
+    if (await res.ok) {
+      return true;
+      // todo
+    }
+  } catch (error) {
+    
   }
 };
 
